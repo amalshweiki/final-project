@@ -91,3 +91,23 @@
 .btn-log {
   background: var(--primary-600);
 }
+.see-details {
+  background: transparent;
+  width: 140px;
+  color: var(--primary-400);
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+}
+.show-less {
+  background: transparent;
+  color: var(--primary-500);
+  width: 140px;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+}
+body,
+html {
+  overflow-x: hidden;
+}

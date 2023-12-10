@@ -1,15 +1,44 @@
+import { useEffect, useState } from "react";
+
+import axios from "axios";
 import AddSchool from "../components/Form/AddSchool";
 import SchoolForm from "../components/Form/SchoolForm";
-import { useState } from "react";
+import Modal from "../components/Form/Modal";
+const baseURL = import.meta.env.VITE_BASE_URL_SCHOOLS;
+
 import "../style/schoolspage.css";
 
 const SchoolsPage = () => {
+  ////
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+  ////
   const [isFormAddVisible, setIsFormAddVisible] = useState(false);
   const addSchool = () => {
     setIsFormAddVisible(true);
   };
+
+  const [schools, setSchools] = useState([]);
+  useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      console.log(response.data);
+      setSchools(response.data.data);
+    });
+  }, []);
+  useEffect(() => {
+    console.log("amal");
+    console.log(schools);
+  }, [schools]);
+
   return (
-    <body>
+    <div>
       <div className="grid-container-school-page">
         <div className="TitleAndPar">
           <h1>Welcome to the Schools Page</h1>
@@ -24,17 +53,21 @@ const SchoolsPage = () => {
         </div>
         <div className="list-of-Schools">
           <h1>List of Participating Schools</h1>
-          <button className="button-88" role="button" onClick={addSchool}>
+          <button
+            className="button-88"
+            role="button"
+            onClick={() => handleOpenModal()}
+          >
             ADD SCHOOL
           </button>
 
           <hr />
         </div>
         <div className="school">
-          {" "}
           <div className="render-com">
-            <SchoolForm />
-            <SchoolForm />
+            {schools.map((school) => (
+              <SchoolForm key={school._id} school={school} />
+            ))}
           </div>
         </div>
       </div>
@@ -43,7 +76,10 @@ const SchoolsPage = () => {
       {isFormAddVisible && (
         <AddSchool onClose={() => setIsFormAddVisible(false)} />
       )}
-    </body>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <AddSchool />
+      </Modal>
+    </div>
   );
 };
 

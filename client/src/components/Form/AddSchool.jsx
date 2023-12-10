@@ -1,94 +1,57 @@
-import { Link } from "react-router-dom";
-import closeImage from "../../images/close icon.jpeg";
-import { useState } from "react";
-import Modal from "react-modal";
 import "../../style/modal.css";
-const customStyles = {
-  content: {
-    background: "#ffc728",
-    width: "30%",
-    height: "60%",
-    margin: "auto",
-    top: "70%",
-    left: "-10%",
-    transform: "translateY(-50%)",
-    zIndex: 10000,
-  },
-};
+import useSchoolForm from "../../hooks/useSchoolForm";
+import AddEditSchool from "./AddEditSchool";
 
-const AddSchool = ({ onClose }) => {
-  const [isModelOpen, setIsModelOpen] = useState(true);
-  const [schoolName, setschoolName] = useState("");
-  const [location, setLocation] = useState("");
-  const [contact, setcakeContact] = useState("");
-  const [busServices, setbusServices] = useState("");
-  const addschool = {
-    name: schoolName,
-    location: location,
-    contact: contact,
-    busServices: busServices,
+const baseURL = import.meta.env.VITE_BASE_URL_SCHOOLS;
+const AddSchool = () => {
+  const initialState = {
+    name: "",
+    location: "",
+    contact: "",
+    busServices: "",
   };
+
+  const {
+    schoolName,
+    location,
+    contact,
+    busServices,
+    handleInputChange,
+    submitForm,
+  } = useSchoolForm(initialState, baseURL);
+  const fields = [
+    {
+      name: "schoolName",
+      value: schoolName,
+      placeholder: "School name",
+      onChange: handleInputChange,
+      label: "School Name",
+    },
+    {
+      name: "location",
+      value: location,
+      placeholder: "School Location",
+      onChange: handleInputChange,
+      label: "School Location",
+    },
+    {
+      name: "contact",
+      value: contact,
+      placeholder: "School Contact",
+      onChange: handleInputChange,
+      label: "School Contact",
+    },
+    {
+      name: "busServices",
+      value: busServices,
+      placeholder: "School Bus Services",
+      onChange: handleInputChange,
+      label: "School Bus Services",
+    },
+  ];
+
   return (
-    <div className="modal-add">
-      <Modal
-        style={customStyles}
-        isOpen={isModelOpen}
-        onRequestClose={onClose}
-        appElement={document.getElementById("app")}
-      >
-        <h1>Add School </h1>
-        <Link to="/schools">
-          <img
-            className="imgclose"
-            src={closeImage}
-            onClick={onClose}
-            alt="Close"
-          />
-        </Link>
-
-        <div>
-          <label className="label">School Name :</label>
-          <input
-            className="form-input"
-            value={schoolName}
-            placeholder="School name"
-            onChange={(e) => setschoolName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>School Location :</label>
-          <input
-            className="form-input"
-            placeholder="School Location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>School Contact :</label>
-          <input
-            className="form-input"
-            placeholder="School Contact"
-            value={contact}
-            onChange={(e) => setcakeContact(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label>School Bus Services :</label>
-          <input
-            className="form-input"
-            value={busServices}
-            placeholder="School Bus Services"
-            onChange={(e) => setbusServices(e.target.value)}
-          />
-        </div>
-
-        <button type="submit" onClick={addschool} className="button-88">
-          add School
-        </button>
-      </Modal>
-    </div>
+    <AddEditSchool title="Add School" fields={fields} onSubmit={submitForm} />
   );
 };
 
