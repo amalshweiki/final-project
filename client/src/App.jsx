@@ -8,7 +8,7 @@ import SchoolsPage from "./pages/SchoolsPage";
 import BusesPage from "./pages/BusesPage";
 import LogIn from "./pages/LogIn";
 import BusDetails from "./components/BusDetails";
-
+import Register from "./pages/Register";
 function App() {
   const Router = createBrowserRouter([
     {
@@ -43,6 +43,10 @@ function App() {
         {
           path: "/login",
           element: <LogIn />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
         },
         {
           path: "/bus-details/:id",

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const busSchema = mongoose.Schema(
   {
-    name: {
+    drivername: {
       type: String,
       required: [true, "Please add Name"],
     },

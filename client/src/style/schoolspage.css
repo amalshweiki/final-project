@@ -80,6 +80,10 @@ hr {
   border: 2px solid rgb(112, 161, 176);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
+form {
+  border: 2px solid rgb(112, 161, 176);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
 .label-style {
   font-size: 18px;
   color: var(--grey-400);

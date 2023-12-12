@@ -54,7 +54,7 @@ const BusForm = ({ bus }) => {
       <div className="bus-details">
         <label className="label-style">
           <span> Name Of Driver:</span>
-          {bus.name}
+          {bus.drivername}
         </label>
         <label className="label-style">
           <span>Contact Of Driver:</span>

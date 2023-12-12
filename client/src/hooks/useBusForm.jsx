@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const useBusForm = (initialState, apiUrl) => {
-  const [driverName, setdriverName] = useState(initialState.drivername);
+  const [drivername, setdrivername] = useState(initialState.drivername);
   const [contact, setbusContact] = useState(initialState.contact);
   const [pickupTimes, setpickupTimes] = useState(initialState.pickupTimes);
   const [dropoffTimes, setdropoffTimes] = useState(initialState.dropoffTimes);
@@ -13,8 +13,8 @@ const useBusForm = (initialState, apiUrl) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
-      case "DriverName":
-        setdriverName(value);
+      case "drivername":
+        setdrivername(value);
         break;
       case "contact":
         setbusContact(value);
@@ -37,24 +37,24 @@ const useBusForm = (initialState, apiUrl) => {
   };
   const submitForm = async () => {
     const data = {
-      name: driverName,
+      name: drivername,
       contact,
       dropoffTimes,
       pickupTimes,
       loadingUnloadingStation,
       schools,
     };
-
+    console.log("Submit Data:", data);
     try {
       const response = await axios.post(apiUrl, data);
       console.log("bus added successfully:", response.data);
     } catch (error) {
-      console.error("school adding school:", error);
+      console.error("Error adding bus:", error);
     }
   };
-  const updateBus = async (schoolId) => {
+  const updateBus = async (busId) => {
     const data = {
-      name: driverName,
+      name: drivername,
       contact,
       dropoffTimes,
       pickupTimes,
@@ -70,7 +70,7 @@ const useBusForm = (initialState, apiUrl) => {
     }
   };
   return {
-    driverName,
+    drivername,
     contact,
     dropoffTimes,
     pickupTimes,

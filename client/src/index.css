@@ -75,11 +75,11 @@
 }
 .edite {
   background: var(--primary-400);
-  width: 100px;
+  width: 145px;
 }
 .delete {
   background: var(--primary-500);
-  width: 100px;
+  width: 145px;
 }
 .button-88:hover {
   box-shadow: 0 0.5em 1.5em -0.5em var(--grey-400);
